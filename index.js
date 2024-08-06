@@ -2,7 +2,13 @@ const express = require('express');
 const dotenv = require('dotenv');
 const {ConnectDB} = require('./helpers/connectDB');
 const cors = require('cors');
-const authRoute = require('./routes/authRoute');
+const morgan = require('morgan'); 
+const authRoute = require('./routes/authRoute'); 
+const attendenceRoute = require('./routes/attendenceRoute');
+const ErrorHandler = require('./middlewares/error');
+
+
+
 //
 dotenv.config({});
 const app = express();
@@ -11,13 +17,11 @@ ConnectDB();
 // Middlewares
 app.use(express.json());
 app.use(cors());
+app.use(morgan('tiny'));
 app.use('/api/v1/auth',authRoute);
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res
-        .status(500)
-        .send('Something went wrong!');
-});
+app.use('/api/v1/attendence',attendenceRoute);
+app.use(ErrorHandler);
+
 
 const PORT = process.env.PORT || 3000;
 

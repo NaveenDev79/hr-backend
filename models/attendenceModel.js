@@ -1,23 +1,26 @@
 const mongoose = require("mongoose");
 
 const attendanceSchema = new mongoose.Schema({
-    employeeId: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: "Users",  
+        ref: "Users", 
+        required: true  
     },
-    employeeName: {
-        type: String,
-        required: true,
+    checkinTime: {
+        type: Date,   
+    },
+    checkoutTime: {
+        type: Date,   
     },
     date: {
-        type: String,
-        required: true,
+        type: Date, 
+        required: true
     },
-    status: {
-        type: String,
-        required: true,
-    },
-});
+    isChecked:{
+        default:false,
+        type:Boolean
+    }
+}, ); 
 
 const attendanceModel = mongoose.model("Attendance", attendanceSchema);
 
