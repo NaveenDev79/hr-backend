@@ -3,10 +3,10 @@ const bcrypt = require('bcrypt');
 const otpGenerator = require('otp-generator');
 const nodemailer = require("nodemailer");
 
-const generateToken = ({id, email}) => {
+const generateToken = ({id, role}) => {
     const token = jwt.sign({
         id: id,
-        email: email
+        role: role
     }, process.env.JWT_SECRET, {expiresIn: '7d'});
 
     return token;
@@ -34,11 +34,10 @@ const sendEmail = async(otp, email) => {
         host: 'smtp.ethereal.email',
         port: 587,
         auth: {
-            user: 'ahmad54@ethereal.email',
-            pass: 'tfzcBSXEVkdUTfDD9H'
+            user: 'berta.macgyver5@ethereal.email',
+            pass: 'gVZ2tbgR6edQxdmn1H'
         }
     });
-
     const info = await transporter.sendMail({
         from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', 
         to: email, 
@@ -87,6 +86,9 @@ const sendEmail = async(otp, email) => {
             </body>
             </html>
         `});
+ 
+        
+        
  
 
 }

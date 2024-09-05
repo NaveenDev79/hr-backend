@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const {type} = require("os");
+const mongoose = require("mongoose"); 
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -24,12 +23,20 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: [
-            "Admin", "HR Admin", "Employee"
+            "Admin", "HR", "Employee"
         ],
         default: "Employee"
     },
     VerificationCode: {
         type: Number
+    },
+    image:{
+        type:String,
+        default:"https://res.cloudinary.com/muhamad-ali/image/upload/v1722761326/upload_7a64366f1f83f1aab1341f8e68482d72_fwpqic.jpg"
+    },
+    isVerified:{
+        type:Boolean,
+        default:false
     }
 }, {timestamps: true});
 
